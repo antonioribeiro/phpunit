@@ -16,11 +16,10 @@ class Extensions_PhptTestCaseTest extends \PHPUnit_Framework_TestCase
         $settings = $phptTestCase->parseIniSection("foo=1\nbar = 2\rbaz = 3\r\nempty=\nignore");
 
         $expected = array(
-            'foo=1',
-            'bar = 2',
-            'baz = 3',
-            'empty=',
-            'ignore',
+            'foo' => '1',
+            'bar' => '2',
+            'baz' => '3',
+            'empty' => '',
         );
 
         $this->assertEquals($expected, $settings);

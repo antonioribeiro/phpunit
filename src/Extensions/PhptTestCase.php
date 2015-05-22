@@ -235,6 +235,18 @@ class PHPUnit_Extensions_PhptTestCase implements PHPUnit_Framework_Test, PHPUnit
      */
     protected function parseIniSection($content)
     {
-        return preg_split('/\n|\r/', $content, -1, PREG_SPLIT_NO_EMPTY);
+        $lines = preg_split('/\n|\r/', $content, -1, PREG_SPLIT_NO_EMPTY);
+        $settings = array();
+
+        foreach ($lines as $line) {
+            if (strpos($line, '=') === false) {
+                continue;
+            }
+
+            list ($name, $value) = explode('=', $line);
+            $settings[trim($name)] = trim($value);
+        }
+
+        return $settings;
     }
 }
